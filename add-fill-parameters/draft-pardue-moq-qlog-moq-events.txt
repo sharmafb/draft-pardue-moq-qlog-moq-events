@@ -126,7 +126,8 @@ Table of Contents
        5.7.17. MOQTNewGroupRequestParameter
        5.7.18. MOQTTrackNamespacePrefixParameter
        5.7.19. MOQTIncludePropertiesParameter
-       5.7.20. MOQTUnknownParameter
+       5.7.20. MOQTTrackPropertyFilterParameter
+       5.7.21. MOQTUnknownParameter
      5.8.  MOQTByteString
      5.9.  MOQTControlMessage
        5.9.1.  MOQTSetupMessage
@@ -815,6 +816,7 @@ Table of Contents
                          MOQTNewGroupRequestParameter /
                          MOQTTrackNamespacePrefixParameter /
                          MOQTIncludePropertiesParameter /
+                         MOQTTrackPropertyFilterParameter /
                          MOQTUnknownParameter
 
    $MOQTParameter /= MOQTBaseParameters
@@ -1013,7 +1015,21 @@ Table of Contents
 
             Figure 52: MOQTIncludePropertiesParameter definition
 
-5.7.20.  MOQTUnknownParameter
+5.7.20.  MOQTTrackPropertyFilterParameter
+
+   A Track Property Filter, as defined in Section 10.2.14 of [MOQT],
+   uses the range encoding in Section 5.1.4 of [MOQT].
+
+   MOQTTrackPropertyFilterParameter = {
+     name: "track_property_filter"
+     ? set_id: uint8
+     ? property_type: uint64
+     ? ranges: [* MOQTRange]
+   }
+
+           Figure 53: MOQTTrackPropertyFilterParameter definition
+
+5.7.21.  MOQTUnknownParameter
 
    MOQTUnknownParameter = {
      name:"unknown"
@@ -1023,7 +1039,7 @@ Table of Contents
      ? value_bytes: RawInfo
    }
 
-                 Figure 53: MOQTUnknownParameter definition
+                 Figure 54: MOQTUnknownParameter definition
 
 5.8.  MOQTByteString
 
@@ -1041,7 +1057,7 @@ Table of Contents
      ? value_bytes: hexstring
    }
 
-                    Figure 54: MOQTByteString definition
+                    Figure 55: MOQTByteString definition
 
 5.9.  MOQTControlMessage
 
@@ -1054,7 +1070,7 @@ Table of Contents
        * text => any
    }
 
-            Figure 55: MOQTControlMessage type socket definition
+            Figure 56: MOQTControlMessage type socket definition
 
    The MOQT control message types defined in this document are as
    follows:
@@ -1081,7 +1097,7 @@ Table of Contents
 
    $MOQTControlMessage /= MOQTBaseControlMessages
 
-               Figure 56: MOQTBaseControlMessages definition
+               Figure 57: MOQTBaseControlMessages definition
 
 5.9.1.  MOQTSetupMessage
 
@@ -1090,7 +1106,7 @@ Table of Contents
      ? setup_options: [* $MOQTSetupOption]
    }
 
-                   Figure 57: MOQTSetupMessage definition
+                   Figure 58: MOQTSetupMessage definition
 
 5.9.2.  MOQTGoaway
 
@@ -1100,7 +1116,7 @@ Table of Contents
      timeout: uint64
    }
 
-                      Figure 58: MOQTGoaway definition
+                      Figure 59: MOQTGoaway definition
 
 5.9.3.  MOQTRequestOk
 
@@ -1111,7 +1127,7 @@ Table of Contents
      ? track_properties: [* MOQTProperty]
    }
 
-                    Figure 59: MOQTRequestOk definition
+                    Figure 60: MOQTRequestOk definition
 
 5.9.4.  MOQTRequestError
 
@@ -1129,7 +1145,7 @@ Table of Contents
      track_name: MOQTByteString
    }
 
-                   Figure 60: MOQTRequestError definition
+                   Figure 61: MOQTRequestError definition
 
 5.9.5.  MOQTSubscribe
 
@@ -1142,7 +1158,7 @@ Table of Contents
      ? parameters: [* $MOQTParameter]
    }
 
-                    Figure 61: MOQTSubscribe definition
+                    Figure 62: MOQTSubscribe definition
 
 5.9.6.  MOQTSubscribeOk
 
@@ -1154,7 +1170,7 @@ Table of Contents
      ? track_properties: [* MOQTProperty]
    }
 
-                   Figure 62: MOQTSubscribeOk definition
+                   Figure 63: MOQTSubscribeOk definition
 
 5.9.7.  MOQTRequestUpdate
 
@@ -1165,7 +1181,7 @@ Table of Contents
      ? parameters: [* $MOQTParameter]
    }
 
-                  Figure 63: MOQTRequestUpdate definition
+                  Figure 64: MOQTRequestUpdate definition
 
 5.9.8.  MOQTPublishStateNotify
 
@@ -1175,7 +1191,7 @@ Table of Contents
      ? parameters: [* $MOQTParameter]
    }
 
-                Figure 64: MOQTPublishStateNotify definition
+                Figure 65: MOQTPublishStateNotify definition
 
 5.9.9.  MOQTPublish
 
@@ -1190,7 +1206,7 @@ Table of Contents
      ? track_properties: [* MOQTProperty]
    }
 
-                     Figure 65: MOQTPublish definition
+                     Figure 66: MOQTPublish definition
 
 5.9.10.  MOQTPublishDone
 
@@ -1201,7 +1217,7 @@ Table of Contents
      ? reason_phrase: text
    }
 
-                   Figure 66: MOQTPublishDone definition
+                   Figure 67: MOQTPublishDone definition
 
 5.9.11.  MOQTFetch
 
@@ -1214,7 +1230,7 @@ Table of Contents
      ? parameters: [* $MOQTParameter]
    }
 
-                      Figure 67: MOQTFetch definition
+                      Figure 68: MOQTFetch definition
 
 5.9.12.  MOQTFetchOk
 
@@ -1227,7 +1243,7 @@ Table of Contents
      ? track_properties: [* MOQTProperty]
    }
 
-                     Figure 68: MOQTFetchOk definition
+                     Figure 69: MOQTFetchOk definition
 
 5.9.13.  MOQTTrackStatus
 
@@ -1240,7 +1256,7 @@ Table of Contents
      ? parameters: [* $MOQTParameter]
    }
 
-                   Figure 69: MOQTTrackStatus definition
+                   Figure 70: MOQTTrackStatus definition
 
 5.9.14.  MOQTPublishNamespace
 
@@ -1252,7 +1268,7 @@ Table of Contents
      ? parameters: [* $MOQTParameter]
    }
 
-                 Figure 70: MOQTPublishNamespace definition
+                 Figure 71: MOQTPublishNamespace definition
 
 5.9.15.  MOQTNamespace
 
@@ -1261,7 +1277,7 @@ Table of Contents
      track_namespace_suffix: [ *MOQTByteString]
    }
 
-                    Figure 71: MOQTNamespace definition
+                    Figure 72: MOQTNamespace definition
 
 5.9.16.  MOQTNamespaceDone
 
@@ -1270,7 +1286,7 @@ Table of Contents
      track_namespace_suffix: [ *MOQTByteString]
    }
 
-                  Figure 72: MOQTNamespaceDone definition
+                  Figure 73: MOQTNamespaceDone definition
 
 5.9.17.  MOQTSubscribeNamespace
 
@@ -1282,7 +1298,7 @@ Table of Contents
      ? parameters: [* $MOQTParameter]
    }
 
-                Figure 73: MOQTSubscribeNamespace definition
+                Figure 74: MOQTSubscribeNamespace definition
 
 5.9.18.  MOQTSubscribeTracks
 
@@ -1294,7 +1310,7 @@ Table of Contents
      ? parameters: [* $MOQTParameter]
    }
 
-                 Figure 74: MOQTSubscribeTracks definition
+                 Figure 75: MOQTSubscribeTracks definition
 
 5.9.19.  MOQTPublishSkipped
 
@@ -1304,7 +1320,7 @@ Table of Contents
      track_name: MOQTByteString
    }
 
-                  Figure 75: MOQTPublishSkipped definition
+                  Figure 76: MOQTPublishSkipped definition
 
 5.10.  MOQTProperty
 
@@ -1315,7 +1331,7 @@ Table of Contents
      ? value_bytes: RawInfo
    }
 
-                       Figure 76: Property definition
+                       Figure 77: Property definition
 
 6.  Security Considerations
 
